@@ -1,79 +1,316 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium ROI Calculator</title>
-    <meta name="description" content="A powerful and visually stunning Return on Investment (ROI) calculator.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MyOperator ROI Calculator</title>
+  <meta name="description" content="Calculate your ROI with MyOperator — India's leading Call + WhatsApp business communication platform." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
 <body>
-    <main class="app-container">
-        <!-- Background decorative elements -->
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
 
-        <div class="calculator-card glass-panel">
-            <header>
-                <h1>MyOperator ROI</h1>
-                <p>Calculate the true growth and returns delivered by MyOperator.</p>
-            </header>
+  <!-- ░░ BACKGROUND GRID ░░ -->
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow--1" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow--2" aria-hidden="true"></div>
 
-            <div class="calculator-grid">
-                <!-- Input Section -->
-                <section class="input-section">
-                    <div class="input-group">
-                        <label for="monthly-cost">Monthly Subscription Cost</label>
-                        <div class="input-wrapper">
-                            <span class="currency-symbol">₹</span>
-                            <input type="number" id="monthly-cost" placeholder="0" min="0" step="100">
-                        </div>
-                    </div>
-                    
-                    <div class="input-group">
-                        <label for="lead-value">Avg. Profit per Sale (Lead Value)</label>
-                        <div class="input-wrapper">
-                            <span class="currency-symbol">₹</span>
-                            <input type="number" id="lead-value" placeholder="0" min="0" step="500">
-                        </div>
-                    </div>
+  <div class="page-wrap">
 
-                    <div class="input-group">
-                        <label for="extra-sales">Extra Sales Closed Monthly</label>
-                        <div class="input-wrapper">
-                            <input type="number" id="extra-sales" placeholder="0" min="0" step="1">
-                            <span class="unit-suffix">Sales</span>
-                        </div>
-                    </div>
-                    
-                    <button id="calculate-btn" class="primary-btn">Calculate ROI</button>
-                </section>
+    <!-- ░░ HEADER ░░ -->
+    <header class="site-header">
+      <div class="logo">
+        <span class="logo-mark">MO</span>
+        <span class="logo-name">MyOperator</span>
+      </div>
+      <nav class="header-links">
+        <a href="https://myoperator.com" target="_blank" rel="noopener">Website</a>
+        <a href="https://myoperator.com/book-demo" target="_blank" rel="noopener" class="btn-demo">Book a Demo →</a>
+      </nav>
+    </header>
 
-                <!-- Output Section -->
-                <section class="output-section">
-                    <div class="result-card primary-result">
-                        <h3>Monthly ROI</h3>
-                        <div class="result-value" id="roi-percentage">0.00%</div>
-                    </div>
+    <!-- ░░ HERO ░░ -->
+    <section class="hero">
+      <div class="hero-eyebrow">
+        <span class="badge badge--live"></span>
+        Trusted by 15,000+ businesses across India
+      </div>
+      <h1 class="hero-title">
+        Calculate your<br />
+        <em>true ROI</em> with MyOperator
+      </h1>
+      <p class="hero-sub">See exactly how much revenue, efficiency and growth MyOperator delivers for your business — before you sign up.</p>
 
-                    <div class="secondary-results">
-                        <div class="result-card">
-                            <h3>Monthly Net Profit</h3>
-                            <div class="result-value" id="net-profit">₹0.00</div>
-                        </div>
-                        <div class="result-card">
-                            <h3>Annualized Profit</h3>
-                            <div class="result-value" id="annualized-profit">₹0.00</div>
-                        </div>
-                    </div>
-                </section>
+      <div class="trust-strip">
+        <span>Amazon</span>
+        <span class="divider">·</span>
+        <span>Apollo</span>
+        <span class="divider">·</span>
+        <span>Domino's</span>
+        <span class="divider">·</span>
+        <span>Razorpay</span>
+        <span class="divider">·</span>
+        <span>TCS</span>
+      </div>
+    </section>
+
+    <!-- ░░ PLAN SELECTOR ░░ -->
+    <section class="section">
+      <h2 class="section-label">Step 1 — Choose your plan</h2>
+      <div class="plans-grid" id="plans-grid">
+
+        <div class="plan-card" data-plan="compact" tabindex="0">
+          <div class="plan-header">
+            <div class="plan-icon plan-icon--compact">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
             </div>
+            <div class="plan-tag plan-tag--compact">Starter</div>
+          </div>
+          <div class="plan-name">Compact</div>
+          <div class="plan-price">₹2,500<span>/month</span></div>
+          <ul class="plan-features">
+            <li>WhatsApp Business API</li>
+            <li>IVR System</li>
+            <li>Multi-agent chat</li>
+            <li>WhatsApp campaigns</li>
+            <li>Email &amp; chat support</li>
+            <li>Basic analytics dashboard</li>
+          </ul>
+          <div class="plan-best">Best for: Startups &amp; small teams</div>
         </div>
-    </main>
-    <script src="script.js"></script>
+
+        <div class="plan-card plan-card--featured" data-plan="sedan" tabindex="0">
+          <div class="plan-popular-badge">Most Popular</div>
+          <div class="plan-header">
+            <div class="plan-icon plan-icon--sedan">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <div class="plan-tag plan-tag--sedan">Growth</div>
+          </div>
+          <div class="plan-name">Sedan</div>
+          <div class="plan-price">₹5,000<span>/month</span></div>
+          <ul class="plan-features">
+            <li>Everything in Compact</li>
+            <li>CRM integrations (Zoho, Freshsales)</li>
+            <li>Advanced call management</li>
+            <li>AI chatbot (WhatsApp)</li>
+            <li>Click-to-call &amp; CTWA</li>
+            <li>Advanced analytics &amp; reports</li>
+          </ul>
+          <div class="plan-best">Best for: Growing SMBs</div>
+        </div>
+
+        <div class="plan-card" data-plan="suv" tabindex="0">
+          <div class="plan-header">
+            <div class="plan-icon plan-icon--suv">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <div class="plan-tag plan-tag--suv">Enterprise</div>
+          </div>
+          <div class="plan-name">SUV</div>
+          <div class="plan-price">₹15,000<span>/month</span></div>
+          <ul class="plan-features">
+            <li>Everything in Sedan</li>
+            <li>AI Voice Bot for calls</li>
+            <li>Dedicated account manager</li>
+            <li>Priority &amp; on-call support</li>
+            <li>Custom API integrations</li>
+            <li>White-label options available</li>
+          </ul>
+          <div class="plan-best">Best for: Large enterprises</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ░░ CALCULATOR BODY ░░ -->
+    <section class="section">
+      <h2 class="section-label">Step 2 — Enter your numbers</h2>
+
+      <div class="calc-grid">
+
+        <!-- INPUTS -->
+        <div class="calc-inputs glass-card">
+          <div class="card-title">Your business inputs</div>
+
+          <div class="input-group">
+            <label for="avg-profit">Average profit per sale</label>
+            <div class="input-wrap">
+              <span class="input-prefix">₹</span>
+              <input type="number" id="avg-profit" value="5000" min="0" step="500" placeholder="5000" />
+            </div>
+            <span class="input-hint">Net profit you earn on each closed deal</span>
+          </div>
+
+          <div class="input-group">
+            <label for="extra-sales">Extra sales per month</label>
+            <div class="input-wrap">
+              <input type="number" id="extra-sales" value="10" min="0" step="1" placeholder="10" />
+              <span class="input-suffix">sales</span>
+            </div>
+            <span class="input-hint">Additional deals closed thanks to better communication</span>
+          </div>
+
+          <div class="input-group">
+            <label for="monthly-leads">Monthly inbound leads</label>
+            <div class="input-wrap">
+              <input type="number" id="monthly-leads" value="100" min="0" step="10" placeholder="100" />
+              <span class="input-suffix">leads</span>
+            </div>
+            <span class="input-hint">Total leads your team currently handles per month</span>
+          </div>
+
+          <div class="input-group">
+            <label for="conversion-lift">Conversion rate improvement</label>
+            <div class="input-wrap">
+              <input type="number" id="conversion-lift" value="15" min="0" max="100" step="1" placeholder="15" />
+              <span class="input-suffix">%</span>
+            </div>
+            <span class="input-hint">MyOperator typically lifts conversion by 10–25%</span>
+          </div>
+
+          <button class="btn-calculate" id="calc-btn">
+            <span>Calculate my ROI</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+        </div>
+
+        <!-- RESULTS -->
+        <div class="calc-results">
+
+          <div class="results-top glass-card">
+            <div class="card-title">Your ROI summary</div>
+            <div class="roi-hero">
+              <div class="roi-hero__label">Monthly ROI</div>
+              <div class="roi-hero__value" id="roi-pct">—</div>
+              <div class="roi-hero__sub" id="roi-verdict">Enter your numbers to see results</div>
+            </div>
+          </div>
+
+          <div class="metrics-grid">
+            <div class="metric-card glass-card">
+              <div class="metric-icon metric-icon--green">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              </div>
+              <div class="metric-label">Monthly net profit</div>
+              <div class="metric-value" id="net-profit">₹0</div>
+            </div>
+            <div class="metric-card glass-card">
+              <div class="metric-icon metric-icon--blue">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </div>
+              <div class="metric-label">Annual net profit</div>
+              <div class="metric-value" id="ann-profit">₹0</div>
+            </div>
+            <div class="metric-card glass-card">
+              <div class="metric-icon metric-icon--amber">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+              </div>
+              <div class="metric-label">Extra revenue / mo</div>
+              <div class="metric-value" id="extra-rev">₹0</div>
+            </div>
+            <div class="metric-card glass-card">
+              <div class="metric-icon metric-icon--purple">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <div class="metric-label">Payback period</div>
+              <div class="metric-value" id="payback">—</div>
+            </div>
+            <div class="metric-card glass-card">
+              <div class="metric-icon metric-icon--teal">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <div class="metric-label">Leads converted / mo</div>
+              <div class="metric-value" id="leads-conv">0</div>
+            </div>
+            <div class="metric-card glass-card">
+              <div class="metric-icon metric-icon--red">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              </div>
+              <div class="metric-label">Break-even sales</div>
+              <div class="metric-value" id="breakeven">—</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ░░ CHARTS ░░ -->
+    <section class="section">
+      <h2 class="section-label">Step 3 — Visualise your growth</h2>
+
+      <div class="chart-tabs" role="tablist">
+        <button class="chart-tab active" data-tab="breakdown" role="tab">Monthly breakdown</button>
+        <button class="chart-tab" data-tab="cumulative" role="tab">12-month growth</button>
+        <button class="chart-tab" data-tab="compare" role="tab">Plan comparison</button>
+      </div>
+
+      <div class="chart-wrap glass-card">
+        <canvas id="roi-chart" role="img" aria-label="ROI visualisation chart">Chart showing ROI analysis</canvas>
+      </div>
+
+      <div class="chart-legend" id="chart-legend"></div>
+    </section>
+
+    <!-- ░░ PLAN RECOMMENDATION ░░ -->
+    <section class="section">
+      <div class="recommendation glass-card" id="recommendation">
+        <div class="rec-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><path d="M21 12c.552 0 1-.448 1-1V8a1 1 0 0 0-1-1h-1V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2h1a1 1 0 0 0 1-1v-3c0-.552-.448-1-1-1z"/></svg>
+        </div>
+        <div class="rec-body">
+          <div class="rec-title" id="rec-title">Your recommendation will appear here</div>
+          <div class="rec-text" id="rec-text">Calculate your ROI above to get a personalised plan recommendation.</div>
+        </div>
+        <a href="https://myoperator.com/book-demo" target="_blank" rel="noopener" class="btn-cta">Get started →</a>
+      </div>
+    </section>
+
+    <!-- ░░ EXPORT ░░ -->
+    <section class="section export-section">
+      <button class="btn-export" id="export-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download ROI report (CSV)
+      </button>
+      <p class="export-note">Includes monthly breakdown, 12-month projection, and plan comparison</p>
+    </section>
+
+    <!-- ░░ STATS STRIP ░░ -->
+    <section class="stats-strip">
+      <div class="stat">
+        <div class="stat-value">15,000+</div>
+        <div class="stat-label">Businesses trust MyOperator</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">2.5B+</div>
+        <div class="stat-label">Customer conversations powered</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">99.9%</div>
+        <div class="stat-label">Platform uptime SLA</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">80%</div>
+        <div class="stat-label">Reduction in manual effort via AI</div>
+      </div>
+    </section>
+
+    <!-- ░░ FOOTER ░░ -->
+    <footer class="site-footer">
+      <div class="footer-brand">
+        <span class="logo-mark logo-mark--sm">MO</span>
+        <span>MyOperator</span>
+      </div>
+      <p class="footer-note">ROI figures are estimates based on your inputs. WhatsApp conversation charges billed separately per Meta's pricing. <a href="https://myoperator.com/pricing" target="_blank" rel="noopener">View official pricing →</a></p>
+      <p class="footer-contact">📞 +91 92129 92129 &nbsp;·&nbsp; ✉️ hello@myoperator.com</p>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
