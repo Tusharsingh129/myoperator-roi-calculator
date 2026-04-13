@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium ROI Calculator</title>
+    <meta name="description" content="A powerful and visually stunning Return on Investment (ROI) calculator.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main class="app-container">
+        <!-- Background decorative elements -->
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+
+        <div class="calculator-card glass-panel">
+            <header>
+                <h1>MyOperator ROI</h1>
+                <p>Calculate the true growth and returns delivered by MyOperator.</p>
+            </header>
+
+            <div class="calculator-grid">
+                <!-- Input Section -->
+                <section class="input-section">
+                    <div class="input-group">
+                        <label for="monthly-cost">Monthly Subscription Cost</label>
+                        <div class="input-wrapper">
+                            <span class="currency-symbol">₹</span>
+                            <input type="number" id="monthly-cost" placeholder="0" min="0" step="100">
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="lead-value">Avg. Profit per Sale (Lead Value)</label>
+                        <div class="input-wrapper">
+                            <span class="currency-symbol">₹</span>
+                            <input type="number" id="lead-value" placeholder="0" min="0" step="500">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="extra-sales">Extra Sales Closed Monthly</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="extra-sales" placeholder="0" min="0" step="1">
+                            <span class="unit-suffix">Sales</span>
+                        </div>
+                    </div>
+                    
+                    <button id="calculate-btn" class="primary-btn">Calculate ROI</button>
+                </section>
+
+                <!-- Output Section -->
+                <section class="output-section">
+                    <div class="result-card primary-result">
+                        <h3>Monthly ROI</h3>
+                        <div class="result-value" id="roi-percentage">0.00%</div>
+                    </div>
+
+                    <div class="secondary-results">
+                        <div class="result-card">
+                            <h3>Monthly Net Profit</h3>
+                            <div class="result-value" id="net-profit">₹0.00</div>
+                        </div>
+                        <div class="result-card">
+                            <h3>Annualized Profit</h3>
+                            <div class="result-value" id="annualized-profit">₹0.00</div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
